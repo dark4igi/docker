@@ -9,12 +9,12 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t mynginx:5 .
-      - docker tag mynginx:5 087628553735.dkr.ecr.us-east-1.amazonaws.com/mynginx:1
-      - docker tag mynginx:5 087628553735.dkr.ecr.us-east-1.amazonaws.com/mynginx:latest   
+      - docker build -t mynginx:2 .
+      - docker tag mynginx:2 087628553735.dkr.ecr.us-east-1.amazonaws.com/mynginx:2
+      - docker tag mynginx:2 087628553735.dkr.ecr.us-east-1.amazonaws.com/mynginx:latest   
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push 087628553735.dkr.ecr.us-east-1.amazonaws.com/mynginx:latest
-      - docker push 087628553735.dkr.ecr.us-east-1.amazonaws.com/mynginx:1
+      - docker push 087628553735.dkr.ecr.us-east-1.amazonaws.com/mynginx:2
