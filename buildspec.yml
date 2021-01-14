@@ -8,13 +8,14 @@ phases:
     commands:
       - echo $CODEBUILD_BUILD_NUMBER
       - echo $COOL
+      - echo $REPO_URL
       - echo Logging in to Amazon ECR...
       - aws --version
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 626851989300.dkr.ecr.us-east-1.amazonaws.com
-      - REPOSITORY_URI=626851989300.dkr.ecr.us-east-1.amazonaws.com/mynginx
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $REPO_URL
+      - REPOSITORY_URI=$REPO_URL/mynginx
       - echo $CODEBUILD_RESOLVED_SOURCE_VERSION
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - IMAGE_TAG=$CODEBUILD_BUILD_NUMBER #${COMMIT_HASH:=latest}
   build:
     commands:
       - echo Build started on `date`
