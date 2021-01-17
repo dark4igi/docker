@@ -6,6 +6,8 @@ phases:
       docker: 19
   pre_build:
     commands:
+      - echo CODEBUILD_RESOLVED_SOURCE_VERSION $CODEBUILD_RESOLVED_SOURCE_VERSION
+      - echo COMMIT_HASH $COMMIT_HASH
       - echo $CODEBUILD_BUILD_NUMBER
       - echo $COOL
       - echo $REPO_URL
