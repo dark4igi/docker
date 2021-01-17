@@ -9,6 +9,8 @@ phases:
       - echo $CODEBUILD_BUILD_NUMBER
       - echo $COOL
       - echo $REPO_URL
+      - echo docker login
+      - docker login -u igi7 -p $PASSWD
       - echo Logging in to Amazon ECR...
       - aws --version
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $REPO_URL
