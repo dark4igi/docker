@@ -6,11 +6,7 @@ phases:
       docker: 19
   pre_build:
     commands:
-      - echo CODEBUILD_BUILD_NUMBER $CODEBUILD_BUILD_NUMBER
-      - echo CODEBUILD_RESOLVED_SOURCE_VERSION $CODEBUILD_RESOLVED_SOURCE_VERSION
-      - echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7
-      - echo CODEBUILD_SOURCE_VERSION $CODEBUILD_SOURCE_VERSION
-      - echo docker login
+      - echo docker login...
       - docker login -u igi7 -p $PASSWD
       - echo Logging in to Amazon ECR...
       - aws --version
@@ -18,7 +14,7 @@ phases:
       - REPOSITORY_URI=$REPO_URL/mynginx
       - echo $CODEBUILD_RESOLVED_SOURCE_VERSION
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=$CODEBUILD_BUILD_NUMBER #${COMMIT_HASH:=latest}
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
       - echo Build started on `date`
@@ -32,7 +28,7 @@ phases:
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-     #- printf '[{"name":"mynginx","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-      - printf '[{"name":"mynginx","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
+      - printf '[{"name":"mynginx","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      #- printf '[{"name":"mynginx","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
 artifacts:
     files: imagedefinitions.json
