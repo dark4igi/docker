@@ -9,8 +9,7 @@ phases:
       - echo CODEBUILD_BUILD_NUMBER $CODEBUILD_BUILD_NUMBER
       - echo CODEBUILD_RESOLVED_SOURCE_VERSION $CODEBUILD_RESOLVED_SOURCE_VERSION
       - echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7
-      - echo CODEBUILD_BUILD_NUMBER $CODEBUILD_BUILD_NUMBER 
-      - echo $CODEBUILD_BUILD_NUMBER | cut -c 1-7
+      - echo CODEBUILD_SOURCE_VERSION $CODEBUILD_SOURCE_VERSION
       - echo docker login
       - docker login -u igi7 -p $PASSWD
       - echo Logging in to Amazon ECR...
