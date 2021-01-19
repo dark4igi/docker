@@ -8,8 +8,9 @@ phases:
     commands:
       - echo CODEBUILD_RESOLVED_SOURCE_VERSION $CODEBUILD_RESOLVED_SOURCE_VERSION
       - echo COMMIT_HASH $COMMIT_HASH
-      - echo $CODEBUILD_BUILD_NUMBER
-      - echo $COOL
+      - echo CODEBUILD_RESOLVED_SOURCE_VERSION $CODEBUILD_RESOLVED_SOURCE_VERSION 
+      - echo CODEBUILD_BUILD_NUMBER $CODEBUILD_BUILD_NUMBER
+      - echo COOL $COOL
       - echo $REPO_URL
       - echo docker login
       - docker login -u igi7 -p $PASSWD
