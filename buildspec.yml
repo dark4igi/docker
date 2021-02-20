@@ -30,9 +30,10 @@ phases:
       - echo Writing image definitions file...
       - printf '[{"name":"mynginx","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       #- printf '[{"name":"mynginx","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
-      - printf '{"AWSEBDockerrunVersion":1,"Image":{"Name":"%s","Update":"true"},"Command":"/bin/sh -c \\"/bin/sh /app/worker.sh\\"","Ports":[{"ContainerPort":"80"}]}' ${REPOSITORY_URI}:app_${IMAGE_TAG} > Dockerrun.aws.json
+      - printf '{"AWSEBDockerrunVersion":1,"Image":{"Name":"%s","Update":"true"},"Command":"/bin/sh -c \\"/bin/sh /app/worker.sh\\"","Ports":[{"ContainerPort":"80"}]}' $REPOSITORY_URI:app_$IMAGE_TAG > Dockerrun.aws.json
 artifacts:
-    files: imagedefinitions.json
-    - Dockerrun.aws.json
-    - cron.yaml
-    - .ebextensions/*
+    files: 
+      - imagedefinitions.json
+      - Dockerrun.aws.json
+      - cron.yaml
+      - .ebextensions/*
